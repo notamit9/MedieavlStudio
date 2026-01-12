@@ -4,11 +4,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   width: 100dvw;
   overflow-x: hidden;
   background-color: #dfdff0;
   font-family: "General Sans", sans-serif;
+  cursor: default;
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
+
+  a, button, [role="button"], input, textarea, select, .cursor-pointer {
+    cursor: none;
+  }
+}
+
+/* Selection color */
+::selection {
+  background-color: #8b5cf6;
+  color: white;
 }
 
 @layer base {
@@ -270,4 +293,75 @@ body {
     transform: translateY(66%) scale(0.65);
     opacity: 0.8;
   }
+}
+
+/* Additional animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, .transition-all {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Better focus states */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Text gradient utility */
+.text-gradient {
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
